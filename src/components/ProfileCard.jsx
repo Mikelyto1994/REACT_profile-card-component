@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import bgTop from '../assets/bg-pattern-top.svg';
-import bgBottom from '../assets/bg-pattern-bottom.svg';
-import bgCard from '../assets/bg-pattern-card.svg';
-import profileImage from '../assets/image-profile.jpg';
+import bgTop from '/bg-pattern-top.svg';
+import bgBottom from '/bg-pattern-bottom.svg';
+import bgCard from '/bg-pattern-card.svg';
+import profileImage from '/image-profile.jpg';
 
 const PageWrapper = styled.div`
   display: flex;
