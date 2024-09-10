@@ -1,26 +1,40 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import bgTop from '/bg-pattern-top.svg';
 import bgBottom from '/bg-pattern-bottom.svg';
 import bgCard from '/bg-pattern-card.svg';
 import profileImage from '/image-profile.jpg';
+
+// Estilos globales para evitar el desbordamiento horizontal
+const GlobalStyle = createGlobalStyle`
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    overflow-x: hidden;
+  }
+`;
 
 const PageWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width:100vw;
+  width: 100vw;
+  max-width: 100vw; /* Asegura que el ancho no exceda el viewport */
   background-color: hsl(184, 73%, 39%);
   background-image: url(${bgTop}), url(${bgBottom});
   background-position: -50% 170%, 130% -150%; /* Centro de bgTop en la esquina superior izquierda, centro de bgBottom en la esquina inferior derecha */
   background-repeat: no-repeat;
   background-size: 980px 980px, 980px 980px; /* Tamaño de las imágenes de fondo */
-    @media (max-width: 375px) {
-    background-position: top left, bottom right; /* Reposiciona las imágenes de fondo */
+  
+  @media (max-width: 375px) {
     background-position: 200% -100%, -100% 200%; 
     background-size: 500px 500px, 500px 500px; /* Reduce el tamaño de las imágenes en pantallas pequeñas */
   }
 `;
+
 const Card = styled.div`
   background-color: white;
   width: 350px;
@@ -29,7 +43,6 @@ const Card = styled.div`
   text-align: center;
   padding-bottom: 20px;
   overflow: hidden;
-  
 `;
 
 const CardBackground = styled.div`
@@ -52,7 +65,8 @@ const Title = styled.h1`
   font-weight: 700;
   color: hsl(231, 12%, 21%);
   margin: 10px 0 5px;
-    span {
+  
+  span {
     color: hsl(240, 0%, 49%);
     font-weight: 400;
   }
@@ -91,28 +105,31 @@ const StatLabel = styled.p`
 
 const ProfileCard = () => {
   return (
-    <PageWrapper>
-      <Card>
-        <CardBackground />
-        <ProfileImage src={profileImage} alt="Profile" />
-        <Title>Victor Crest <span>26</span></Title>
-        <Subtitle>London</Subtitle>
-        <Stats>
-          <Stat>
-            <StatNumber>80K</StatNumber>
-            <StatLabel>Followers</StatLabel>
-          </Stat>
-          <Stat>
-            <StatNumber>803K</StatNumber>
-            <StatLabel>Likes</StatLabel>
-          </Stat>
-          <Stat>
-            <StatNumber>1.4K</StatNumber>
-            <StatLabel>Photos</StatLabel>
-          </Stat>
-        </Stats>
+    <>
+      <GlobalStyle />
+      <PageWrapper>
+        <Card>
+          <CardBackground />
+          <ProfileImage src={profileImage} alt="Profile" />
+          <Title>Victor Crest <span>26</span></Title>
+          <Subtitle>London</Subtitle>
+          <Stats>
+            <Stat>
+              <StatNumber>80K</StatNumber>
+              <StatLabel>Followers</StatLabel>
+            </Stat>
+            <Stat>
+              <StatNumber>803K</StatNumber>
+              <StatLabel>Likes</StatLabel>
+            </Stat>
+            <Stat>
+              <StatNumber>1.4K</StatNumber>
+              <StatLabel>Photos</StatLabel>
+            </Stat>
+          </Stats>
         </Card>
-    </PageWrapper>
+      </PageWrapper>
+    </>
   );
 };
 
